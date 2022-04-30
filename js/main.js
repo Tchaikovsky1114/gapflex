@@ -1,4 +1,4 @@
-import 'regenerator-runtime/runtime'
+import 'regenerator-runtime'
 require('../scss/main.scss');
 
 
@@ -99,60 +99,57 @@ let pageNumber = 1;
 //}
 
 
-// 버튼클릭
 
+const moviesList = document.querySelector('.movies');
+const moviesCount = document.querySelector('.movies--count');
+const callMoreMovieButton = document.querySelector('.movies--button')
 
+  async function getData(pageNumber,searchValue="bourne") {
+  const {Search:movies,totalResults} = await (await fetch(`https://www.omdbapi.com?${API_KEY}&s=${searchValue}&page=${pageNumber}`)).json();
+    renderMovies(movies,totalResults)
+  }
+  
+  const renderMovies = (movies='bourne',totalResults=100) => {
+    searchedResult(totalResults)
+    if(movies){
+    movies.forEach(movie =>{
+    const movieEl = document.createElement('li');
+    const movieImg = document.createElement('img')
+    movieImg.setAttribute('src',`${movie.Poster}`);
+    movieImg.setAttribute('alt',`${movie.Title}`);
+    movieEl.innerHTML = `
+    <div class="movie--title"><p><span>${movie.Title}</span></p></div>
+    <div class=""movie--release--year> released in <span>${movie.Year}</span></div>
+    `;
+    movielist.append(movieEl);
+    movieEl.append(movieImg);
+    })
+  }
+  }
 
-
-const handleSearch = (e) =>{
-  async function getData() {
-    const {Search:movies,totalResults} = await (await fetch(`https://www.omdbapi.com?${API_KEY}&s=${e.target.value}&page=${pageNumber}`)).json();
-      pageNumber++;  
-      console.log(movies);
+  const searchedResult = (totalResults) =>{
+    const resultCount = document.createElement('div');
+    resultCount.textContent = `검색결과 총 ${totalResults}건이 있습니다.`
+    moviesCount.append(resultCount);
     }
-    getData()
-}
-
+// 초기 제이슨 본 밀고 검색결과부터 보이게 하면 된다 미래의 나야
+  const handleSearch = (e) =>{
+    const searchResult = e.target.value;
+    getData(1,searchResult)
+    console.log('excuted')
+  }
+  getData()
 searchInput.addEventListener('change',handleSearch)
 
 
 
 
-
-
-
-const moviesList = document.querySelector('.movies');
-const moviescount = document.querySelector('.movies--count');
-
-
-
-const callMoreMovieButton = document.querySelector('.movies--button')
-
 callMoreMovieButton.addEventListener('click', () => {
   pageNumber++;
-  getData(pageNumber, moviesList);
+  getData(pageNumber);
 })
 
-async function getData(pageNumber,containerEl,searchValue="busters") {
-  const {Search:movies,totalResults} = await (await fetch(`https://www.omdbapi.com?${API_KEY}&s=${searchValue}&page=${pageNumber}`)).json();
-    renderMovies(movies,totalResults)
-  }
-  
-  function renderMovies(movies,totalResults){
-  movies.forEach(movie =>{
-    const movieEl = document.createElement('li');
-    movieEl.textContent = movie.Title;
-    movielist.append(movieEl);
-    })
-    
-  }
-  getData(pageNumber, moviesList)  
-
-
-  // const searchResult = document.createElemt('li');
-  //   searchResult.textContent = `검색결과 총 ${totalResults}건이 있습니다.`
-  //   moviescount.append(searchResult);
-
+ 
 
 
 
