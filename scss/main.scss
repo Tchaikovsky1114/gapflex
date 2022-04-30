@@ -52,6 +52,7 @@ li {
       height:100%;
       display: block;
       position: absolute;
+      background-attachment: fixed;
       filter: blur(1px) grayscale(30%);
       
     }
@@ -80,6 +81,7 @@ li {
         color:white;
         border: 1px solid white;
         font-size:18px;
+        cursor: pointer;
         &:hover{
           border: 1px solid #b12;
           color:#ccc;
