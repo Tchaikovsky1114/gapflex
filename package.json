@@ -1,32 +1,86 @@
 {
   
   "scripts": {
-    "sass": "sass --watch /scss/main.scss ./style/main.css",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   
-    "plugins": [
-      [
-        "@babel/plugin-transform-runtime",
-        {
-          "regenerator": true
-        }]],
+    
+  "dev": "parcel index.html",
+  
+    
+  "build": "parcel build index.html"
+  
+  },
+  "staticFiles": {
+    "staticPath": "static"
+  },
+  "plugins": [
+  
+    
+  [
+  
+    
+    
+  "@babel/plugin-transform-runtime",
+  
+    
+    
+  {
+  
+    
+    
+    
+  "regenerator": true
+  
+    
+    
+  }
+  
+    
+  ]
+  
+  ],
   
   "dependencies": {
-    "@babel/runtime": "^7.17.9",
-    "cookie": "^0.5.0",
-    "node-sass": "^7.0.1",
-    "parcel": "^2.5.0"
+  
+    
+  "@babel/runtime": "^7.17.9",
+  
+    
+  "cookie": "^0.5.0",
+  
+    
+  "node-sass": "^7.0.1",
+  
+    
+  "parcel": "^2.5.0"
+  
   },
+  
   "browsersList": [
-    "last 3 and_chr versions",
-    "last 3 chrome versions",
-    "last 3 opera versions",
-    "last 3 ios_saf versions",
-    "last 3 safari versions"
+  
+    
+  "last 3 and_chr versions",
+  
+    
+  "last 3 chrome versions",
+  
+    
+  "last 3 opera versions",
+  
+    
+  "last 3 ios_saf versions",
+  
+    
+  "last 3 safari versions"
+  
   ],
   
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.17.10"
+  
+    
+  "@babel/plugin-transform-runtime": "^7.17.10",
+  
+    
+  "parcel-plugin-static-files-copy": "^2.6.0"
+  
   }
 }
