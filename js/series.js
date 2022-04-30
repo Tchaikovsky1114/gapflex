@@ -1,6 +1,4 @@
-import './runtime'
-require('../scss/main.scss');
-require('../scss/series.scss');
+
 
 const searchIcon = document.querySelector('#search-icon');
 const searchInput = document.querySelector('#search-input');
