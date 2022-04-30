@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="GAPFLEX" />
+    <meta property="og:title" content="GAPFLEX International" />
+    <meta
+      property="og:description"
+      content="GAPFLEX has the largest number of Movieflex in the world.GAPFLEX is now aiming for an online platform where you can watch movies anywhere, anytime, beyond offline."
+    />
+    <meta property="og:image" content="/public/images/GAPFLEX.PNG" />
+    <meta property="og:url" content="https://null" />
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:site" content="GAPFLEX" />
+    <meta property="twitter:title" content="GAPFLEX" />
+    <meta
+      property="twitter:description"
+      content="GAPFLEX has the largest number of Movieflex in the world.GAPFLEX is now aiming for an online platform where you can watch movies anywhere, anytime, beyond offline."
+    />
+    <meta property="twitter:image" content="/public/images/GAPFLEX.PNG" />
+    <meta property="twitter:url" content="https://null" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+
+    <script defer src="./js/main.js"></script>
+
+    <title>Want All Movies there, GAPFLEX</title>
+    <link rel="icon" href="/public/images/favicon.ico" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <nav class="top-navigation">
+        <div class="inner">
+          <div class="logo">
+            <img
+              src="/public/images/GAPFLEX.PNG"
+              width="64px"
+              height="48px"
+              alt="logo"
+            />
+          </div>
+          <ul class="env-menu">
+            <li><a>SERIES</a></li>
+            <li><a>MOVIE</a></li>
+          </ul>
+          <ul class="search-menu">
+            <li>
+              <button id="search-icon">
+                <svg
+                  data-value="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"
+                  />
+                </svg>
+              </button>
+              <input
+                id="search-input"
+                type="text"
+                value=""
+                placeholder="search more movie or series..."
+              />
+            </li>
+          </ul>
+          <ul class="profile-menu">
+            <li><a>SIGN-UP</a></li>
+            <li><a>LOG-IN</a></li>
+            <li><a>MY PAGE</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="slider">
+        <div class="slide showing">1</div>
+        <div class="slide">2</div>
+        <div class="slide">3</div>
+        <div class="slide">4</div>
+        <div class="slide">5</div>
+      </div>
+      <div class="button--wrapper">
+        <button class="pause-button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+            <path
+              d="M272 63.1l-32 0c-26.51 0-48 21.49-48 47.1v288c0 26.51 21.49 48 48 48L272 448c26.51 0 48-21.49 48-48v-288C320 85.49 298.5 63.1 272 63.1zM80 63.1l-32 0c-26.51 0-48 21.49-48 48v288C0 426.5 21.49 448 48 448l32 0c26.51 0 48-21.49 48-48v-288C128 85.49 106.5 63.1 80 63.1z"
+            />
+          </svg>
+        </button>
+        <button class="play-button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+            <path
+              d="M361 215C375.3 223.8 384 239.3 384 256C384 272.7 375.3 288.2 361 296.1L73.03 472.1C58.21 482 39.66 482.4 24.52 473.9C9.377 465.4 0 449.4 0 432V80C0 62.64 9.377 46.63 24.52 38.13C39.66 29.64 58.21 29.99 73.03 39.04L361 215z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <section class="section banner">
+        <div class="inner">
+          <ul class="movies--list"></ul>
+          <button class="movies--button">More Movies</button>
+        </div>
+        <div class="movies--count"></div>
+      </section>
+    </div>
+  </body>
+</html>

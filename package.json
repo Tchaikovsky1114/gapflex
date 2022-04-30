@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "sass": "sass --watch /scss/main.scss ./style/main.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cookie": "^0.5.0",
+    "node-sass": "^7.0.1",
+    "parcel": "^2.5.0"
+  },
+  "browsersList": [
+    "last 3 and_chr versions",
+    "last 3 chrome versions",
+    "last 3 opera versions",
+    "last 3 ios_saf versions",
+    "last 3 safari versions"
+  ]
+}
