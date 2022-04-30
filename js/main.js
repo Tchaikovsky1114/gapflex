@@ -55,13 +55,7 @@ onSlide();
 
 const movielist = document.querySelector('.movies--list');
 const API_KEY = 'apikey=7035c60c';
-let pageNumber = 1;
 
-//Search{
-//Title Year imdbID Type Poster
-//}
-
-const moviesList = document.querySelector('.movies');
 
 const callMoreMovieButton = document.querySelector('.movies--button');
 
@@ -69,12 +63,16 @@ async function getData(pageNumber, searchValue = 'bourne') {
   const { Search: movies, totalResults } = await (
     await fetch(`https://www.omdbapi.com?${API_KEY}&s=${searchValue}&page=${pageNumber}`)).json();
   renderMovies(movies, totalResults, searchValue);
+  searchedResultCount(totalResults, searchValue);
+  console.log(totalResults);
 }
 
-const renderMovies = (movies = 'bourne', totalResults = 100, searchValue) => {
-  searchedResult(totalResults, searchValue);
+const renderMovies = (movies = 'bourne', totalResults, searchValue) => {
+  
   console.log(movies);
-  [...movies].forEach((movie) => {
+  
+  [...movies].forEach((movie,i) => {
+    if(i < totalResults){
     const movieEl = document.createElement('li');
     const movieImg = document.createElement('img');
     movieImg.setAttribute('src', `${movie.Poster}`);
@@ -85,6 +83,7 @@ const renderMovies = (movies = 'bourne', totalResults = 100, searchValue) => {
     `;
     movielist.append(movieEl);
     movieEl.append(movieImg);
+  }
   });
 };
 
@@ -92,11 +91,17 @@ const renderMovies = (movies = 'bourne', totalResults = 100, searchValue) => {
 
 const moviesCount = document.querySelector('.movies--count');
 const resultCount = document.createElement('div');
-const searchedResult = (totalResults, searchValue) => {
+
+const searchedResultCount = (totalResults, searchValue) => {
+  if(moviesCount.hasChildNodes()){
+    console.log('by returned');
+    return;
+  }
+  resultCount.classList.add('movies--result')
     resultCount.textContent = '';
-    resultCount.textContent = `"${searchValue}" 검색 결과 관련 항목이 총 ${totalResults}건이 있습니다.`;
+    resultCount.textContent = `There are "${totalResults}" total result for your "${searchValue.toUpperCase()}" search. `;
     moviesCount.append(resultCount);
-  
+
 };
 // 초기 제이슨 본 밀고 검색결과부터 보이게 하면 된다 미래의 나야
 const handleSearch = (e) => {
@@ -105,11 +110,11 @@ const handleSearch = (e) => {
   console.log('excuted');
 };
 getData();
+
 searchInput.addEventListener('change', handleSearch);
 
-const removeChild = (parents) => {
-  parent.remo;
-};
+
+let pageNumber = 1;
 
 callMoreMovieButton.addEventListener('click', () => {
   pageNumber++;
