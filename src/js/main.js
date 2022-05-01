@@ -2,7 +2,6 @@ import 'regenerator-runtime/runtime'
 import './series.js'
 import '../scss/main.scss'
 
-
 const searchIcon = document.querySelector('#search-icon');
 const searchInput = document.querySelector('#search-input');
 const handleInput = () => {
