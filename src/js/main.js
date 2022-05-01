@@ -1,8 +1,10 @@
+import 'regenerator-runtime/runtime'
+import './series.js'
+import '../scss/main.scss'
 
 
 const searchIcon = document.querySelector('#search-icon');
 const searchInput = document.querySelector('#search-input');
-const searchInputValue = document.querySelector('#search-input').value;
 const handleInput = () => {
   searchInput.focus();
 };
@@ -81,7 +83,7 @@ async function getData(pageNumber, searchValue = 'bourne') {
   const { Search: movies, totalResults } = await (
     await fetch(`https://www.omdbapi.com?${API_KEY}&s=${searchValue}&page=${pageNumber}`)).json();
   renderMovies(movies, totalResults, searchValue);
-  if(pageNumber * 10 < totalResults){
+  if(pageNumber * 10 < totalResults || totalResults < 10){
   searchedResultCount(totalResults, searchValue);
 }else{
   return;
@@ -132,6 +134,7 @@ const searchedResultCount = (totalResults, searchValue) => {
 let searchResult;
 let pageNumber = 1;
 const handleSearch =  (e) => {
+  pageNumber = 1;
   searchResult = e.target.value;
   while(movielist.hasChildNodes()){
     movielist.removeChild(movielist.firstChild)
