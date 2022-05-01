@@ -51,8 +51,8 @@
           />
         </div>
         <ul class="env-menu">
-          <li><a href="/">HOME</a></li>
-          <li><a href="/pages/series.html">SERIES</a></li>
+          <li class="history" route="/home">HOME</li>
+          <li class="history" route="/series">SERIES</li>
         </ul>
         <ul class="search-menu">
           <li>
@@ -76,14 +76,15 @@
           </li>
         </ul>
         <ul class="profile-menu">
-          <li><a href="#signup">SIGN-UP</a></li>
-          <li><a href="/">LOG-IN</a></li>
-          <li><a href="#profile">MY PAGE</a></li>
+          <li class="history" route="/signup">SIGN-UP</li>
+          <li class="history" route="/login">LOG-IN</li>
+          <li class="history" route="/profile">MY PAGE</li>
         </ul>
       </div>
     </nav>
+      <!-- route content view -->
 
-    <div class="wrapper">
+    <div id="app-contents">
      
       <div class="slider">
         <div class="slide showing">

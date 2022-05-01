@@ -1,7 +1,7 @@
 import 'regenerator-runtime/runtime'
 import './series.js'
 import '../scss/main.scss'
-
+import './navigate.js'
 const searchIcon = document.querySelector('#search-icon');
 const searchInput = document.querySelector('#search-input');
 const handleInput = () => {
@@ -14,10 +14,14 @@ const SHOWING = 'showing';
 const firstSilder = document.querySelector('.slide:first-child');
 const pauseButton = document.querySelector('.pause-button');
 const playButton = document.querySelector('.play-button');
-let flagger = false;
+ 
+export const globalStore = {
+  flagger: false
+}
+
 function onSlide() {
   const autoplayBanner = setInterval(() => {
-    if (flagger) {
+    if (globalStore.flagger) {
       return;
     }
     const currentSlide = document.querySelector(`.${SHOWING}`);
@@ -39,10 +43,10 @@ function onSlide() {
   }, 5000);
 }
 pauseButton.addEventListener('click', () => {
-  flagger = true;
+  globalStore.flagger = true;
 });
 playButton.addEventListener('click', () => {
-  flagger = false;
+  globalStore.flagger = false;
 });
 
 onSlide();

@@ -1,14 +1,14 @@
 import 'regenerator-runtime/runtime'
 
-// const searchIcon = document.querySelector('#search-icon');
-// const searchInput = document.querySelector('#search-input');
-// const searchInputValue = document.querySelector('#search-input').value;
-// const handleInput = () => {
-//   searchInput.focus();
-// };
+const searchIcon = document.querySelector('#search-icon');
+const searchInput = document.querySelector('#search-input');
+const searchInputValue = document.querySelector('#search-input').value;
+const handleInput = () => {
+  searchInput.focus();
+};
 
 
-// searchIcon.addEventListener('click', handleInput);
+searchIcon.addEventListener('click', handleInput);
 
 
 
