@@ -1,28 +1,96 @@
-import { globalStore } from "./main";
+import {
+    globalStore,
+    Home
+} from "./Home.js";
+import {
+    Signup
+} from "./Signup";
+import {
+    Profile
+} from "./Profile";
+import {
+    Login
+} from "./Login";
+import {
+    Series
+} from "./Series";
 
 const contentsEl = document.querySelector('#app-contents');
 
-window.onload = () => {
-  const navigation = document.querySelector('.top-navigation');
-  navigation.addEventListener('click',(e)=>{
-    if(!e.target.matches('.history')){
-      return;
+const routes = [{
+        path: '/',
+        components: Home
+    },
+    {
+        path: '/series',
+        components: Series
+    },
+    {
+        path: '/signup',
+        components: Signup
+    },
+    {
+        path: '/login',
+        components: Login
+    },
+    {
+        path: '/profile',
+        components: Profile
     }
-    const pathName = e.target.getAttribute('route')
-      historyRouterPush(pathName,contentsEl)
-      
-  })
-  
+]
+
+window.onload = () => {
+    const navigation = document.querySelector('.top-navigation');
+    navigation.addEventListener('click', (e) => {
+        if (!e.target.matches('.history')) {
+            return;
+        }
+        e.preventDefault();
+        const pathName = e.target.getAttribute('href')
+        window.history.pushState({
+            pathName
+        }, null, location.origin + pathName);
+        renderHtml(pathName)
+    })
 }
 
-const historyRouterPush = (pathName,element) => {
-  window.history.pushState({},pathName,window.location.origin + pathName);
-  renderHtml(element,pathName)
-  console.log('route[pathname]');
+
+const renderHtml = async(pathName) => {
+
+    const component = routes.find(route => route.path === pathName).components;
+    contentsEl.replaceChildren(await component());
+
+
 }
 
-const renderHtml = (element,pathName) => {
-  globalStore.flagger = true;
-  element.innerHTML = pathName;
-}
-window.onpopstate = () => renderHtml(element,routes[window.location.pathname]);
+//popstate는 pushState로 주소를 바꾼 뒤에 뒤로가기,앞으로가기를 했을 때 발생하는 이밴트다.
+//pushState를 할 때 이벤트가 발생하는 것이 아니다.
+window.addEventListener('popstate', () => {
+    renderHtml(window.location.pathname);
+})
+
+export const createElement = string => {
+    const componentTemplate = document.createElement('template');
+    componentTemplate.innerHTML = string;
+    return componentTemplate.content;
+};
+
+renderHtml(window.location.pathname);
+
+
+
+
+export const NotFound = () => createElement('<h1>404 NotFound</p>');
+
+// const fetchData = async url => {
+//   const res = await fetch(url);
+//   const json = await res.json();
+//   return json;
+// };
+
+
+
+
+
+
+//

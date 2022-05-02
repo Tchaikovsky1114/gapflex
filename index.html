@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,55 +9,40 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="GAPFLEX" />
     <meta property="og:title" content="GAPFLEX International" />
-    <meta
-      property="og:description"
-      content="GAPFLEX has the largest number of Movieflex in the world.GAPFLEX is now aiming for an online platform where you can watch movies anywhere, anytime, beyond offline."
-    />
+    <meta property="og:description" content="GAPFLEX has the largest number of Movieflex in the world.GAPFLEX is now aiming for an online platform where you can watch movies anywhere, anytime, beyond offline." />
     <meta property="og:image" content="/static/images/GAPFLEX.jpg" />
     <meta property="og:url" content="https://null" />
     <meta property="twitter:card" content="summary" />
     <meta property="twitter:site" content="GAPFLEX" />
     <meta property="twitter:title" content="GAPFLEX" />
-    <meta
-      property="twitter:description"
-      content="GAPFLEX has the largest number of Movieflex in the world.GAPFLEX is now aiming for an online platform where you can watch movies anywhere, anytime, beyond offline."
-    />
+    <meta property="twitter:description" content="GAPFLEX has the largest number of Movieflex in the world.GAPFLEX is now aiming for an online platform where you can watch movies anywhere, anytime, beyond offline." />
     <meta property="twitter:image" content="/static/images/GAPFLEX.jpg" />
     <meta property="twitter:url" content="https://null" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tapestry&display=swap" rel="stylesheet">
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Tapestry&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css" />
     <link rel="icon" href="/static/images/favicon.ico" />
     <link rel="stylesheet" href="./src//scss/main.scss" />
-    
-    <title>Want All Movies there, GAPFLEX</title>
-    
-  </head>
-  <body>
 
+    <title>Want All Movies there, GAPFLEX</title>
+</head>
+
+<body>
     <nav class="top-navigation">
-      <div class="inner">
-        <div class="logo">
-          <img
-            src="/static/images/GAPFLEX.jpg"
-            width="64px"
-            height="48px"
-            alt="logo"
-          />
-        </div>
-        <ul class="env-menu">
-          <li class="history" route="/home">HOME</li>
-          <li class="history" route="/series">SERIES</li>
-        </ul>
-        <ul class="search-menu">
-          <li>
-            <button id="search-icon">
+        <div class="inner">
+            <div class="logo">
+                <img src="/static/images/GAPFLEX.jpg" width="64px" height="48px" alt="logo" />
+            </div>
+            <ul class="env-menu">
+                <li><a class="history" href="/">HOME</a></li>
+                <li><a class="history" href="/series">SERIES</a></li>
+            </ul>
+            <ul class="search-menu">
+                <li>
+                    <button id="search-icon">
               <svg
                 data-value="false"
                 xmlns="http://www.w3.org/2000/svg"
@@ -67,27 +53,21 @@
                 />
               </svg>
             </button>
-            <input
-              id="search-input"
-              type="text"
-              value=""
-              placeholder="search more movie or series..."
-            />
-          </li>
-        </ul>
-        <ul class="profile-menu">
-          <li class="history" route="/signup">SIGN-UP</li>
-          <li class="history" route="/login">LOG-IN</li>
-          <li class="history" route="/profile">MY PAGE</li>
-        </ul>
-      </div>
+                    <input id="search-input" type="text" value="" placeholder="search more movie or series..." />
+                </li>
+            </ul>
+            <ul class="profile-menu">
+                <li><a class="history" href="/signup">SIGN-UP</a></li>
+                <li><a class="history" href="/login">LOG-IN</a></li>
+                <li><a class="history" href="/profile">MY PAGE</a></li>
+            </ul>
+        </div>
     </nav>
-      <!-- route content view -->
+    <!-- route content view -->
 
     <div id="app-contents">
-     
-      <div class="slider">
-        <div class="slide showing">
+        <!-- <div class="slider">
+        <div class="slide first-slide showing">
           <h3>Monthly Recommend Movie Series<br/>:The Bourne Series</h3>
           
           <img class="silde--image" src="https://m.media-amazon.com/images/M/MV5BNGNiNmU2YTMtZmU4OS00MjM0LTlmYWUtMjVlYjAzYjE2N2RjXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SX300.jpg" alt="Bourne Series">
@@ -162,8 +142,9 @@
         </div>
         
         
-      </section>
+      </section> -->
     </div>
     <script type="module" src="./src/js/main.js"></script>
-  </body>
+</body>
+
 </html>
