@@ -2,7 +2,7 @@ import 'regenerator-runtime/runtime'
 import '../scss/main.scss'
 import './navigate.js'
 
-
+export const homeEl = document.querySelector('#app-contents');
 
 // const searchIcon =  document.querySelector('#search-icon');
 // const searchInput = document.querySelector('#search-input');

@@ -14,8 +14,15 @@ import {
 import {
     Series
 } from "./Series";
+import { homeEl } from "./main.js";
 
-const contentsEl = document.querySelector('#app-contents');
+
+
+const signupEl = document.querySelector('#app-contents');
+const profileEl = document.querySelector('#app-contents');
+const loginEl = document.querySelector('#app-contents');
+const seriesEl = document.querySelector('#app-contents');
+
 
 const routes = [{
         path: '/',
@@ -58,10 +65,11 @@ window.onload = () => {
 const renderHtml = async(pathName) => {
 
     const component = routes.find(route => route.path === pathName).components;
-    contentsEl.replaceChildren(await component());
-
+    console.log(await component());
+    homeEl.replaceChildren(await component());
 
 }
+
 
 //popstate는 pushState로 주소를 바꾼 뒤에 뒤로가기,앞으로가기를 했을 때 발생하는 이밴트다.
 //pushState를 할 때 이벤트가 발생하는 것이 아니다.

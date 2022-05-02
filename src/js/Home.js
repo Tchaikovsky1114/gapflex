@@ -12,9 +12,10 @@ export const globalStore = {
 
 
 export const Home = async() => {
-    window.onload = () => {
+    globalStore.flagger = false;
+    setTimeout(() => {
 
-        const movielist = document.querySelector('.movies--list');
+
         const API_KEY = 'apikey=7035c60c';
         const callMoreMovieButton = document.querySelector('.movies--button');
 
@@ -24,19 +25,19 @@ export const Home = async() => {
                 Search: movies,
                 totalResults
             } = await (await fetch(`https://www.omdbapi.com?${API_KEY}&s=${searchValue}&page=${pageNumber}`)).json();
-            renderMovies(movies, totalResults, searchValue);
+
+            renderMovies(movies, totalResults);
+
             if (pageNumber * 10 < totalResults || totalResults < 10) {
                 searchedResultCount(totalResults, searchValue);
-            } else {
-                return;
             }
             console.log(totalResults);
         }
-        const renderMovies = (movies = 'bourne', totalResults, searchValue) => {
-            console.log(movies);
-            console.log(pageNumber);
-            [...movies].forEach((movie, i) => {
 
+        const movielist = document.querySelector('.movies--list')
+        const renderMovies = (movies = 'bourne', totalResults) => {
+            console.log("rendermovie start");
+            [...movies].forEach((movie, i) => {
                 if (i < totalResults) {
                     const movieEl = document.createElement('li');
                     const movieImg = document.createElement('img');
@@ -46,8 +47,8 @@ export const Home = async() => {
     <div class="movie--title"><p><span>${movie.Title}</span></p></div>
     <div class=""movie--release--year> released in <span>${movie.Year}</span></div>
     `;
-                    movielist.append(movieEl);
-                    movieEl.append(movieImg);
+                    movieEl.appendChild(movieImg);
+                    movielist.appendChild(movieEl);
                 }
             });
         };
@@ -60,11 +61,11 @@ export const Home = async() => {
             if (moviesCount.hasChildNodes()) {
                 resultCount.textContent = '';
                 resultCount.textContent = `There are "${totalResults}" total result for your "${searchValue.toUpperCase()}" search. `;
+            } else {
+                resultCount.textContent = '';
+                resultCount.textContent = `There are "${totalResults}" total result for your "${searchValue.toUpperCase()}" search. `;
+                moviesCount.append(resultCount);
             }
-            resultCount.textContent = '';
-            resultCount.textContent = `There are "${totalResults}" total result for your "${searchValue.toUpperCase()}" search. `;
-            moviesCount.append(resultCount);
-
         };
         let searchResult;
         let pageNumber = 1;
@@ -74,7 +75,7 @@ export const Home = async() => {
             while (movielist.hasChildNodes()) {
                 movielist.removeChild(movielist.firstChild)
             }
-            getData(1, searchResult);
+            getData(pageNumber, searchResult);
             console.log('excuted');
         };
         getData();
@@ -141,7 +142,7 @@ export const Home = async() => {
         onSlide()
 
 
-    }
+    }, 500)
     return createElement(`<div class="slider">
 <div class="slide showing">
   <h3>Monthly Recommend Movie Series<br/>:The Bourne Series</h3>
