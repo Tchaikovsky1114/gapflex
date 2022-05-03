@@ -1,4 +1,4 @@
-import { Home } from "./Home.js";
+import { Home } from "./Home";
 import { Signup } from "./Signup.js";
 import { Profile } from "./Profile.js";
 import { Login } from "./Login.js";
