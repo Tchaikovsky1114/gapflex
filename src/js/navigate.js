@@ -4,16 +4,16 @@ import {
 } from "./Home.js";
 import {
     Signup
-} from "./Signup";
+} from "./Signup.js";
 import {
     Profile
-} from "./Profile";
+} from "./Profile.js";
 import {
     Login
-} from "./Login";
+} from "./Login.js";
 import {
     Series
-} from "./series";
+} from "./Series.js";
 import { homeEl } from "./main.js";
 
 
