@@ -1,55 +1,62 @@
 {
-  "scripts": {
-    "dev": "parcel index.html",
-    "build": "parcel build index.html"
-  },
-  "staticFiles": {
-    "staticPath": "static"
-  },
-  "plugins": [
-    [
-      "@babel/plugin-transform-runtime",
-      {
-        "regenerator": true
-      }
+    "scripts": {
+        "dev": "parcel index.html",
+        "build": "parcel build index.html"
+    },
+    "staticFiles": {
+        "staticPath": "static"
+    },
+    "plugins": [
+        [
+            "@babel/plugin-transform-runtime",
+            {
+                "regenerator": true
+            }
+        ]
+    ],
+    "dependencies": {
+        "@babel/runtime": "^7.17.9",
+        "cookie": "^0.5.0",
+        "express": "^4.18.1",
+        "mini-css-extract-plugin": "^2.6.0",
+        "node-sass": "^7.0.1",
+        "postcss": "^8.4.13",
+        "postcss-cli": "^9.1.0",
+        "postcss-loader": "^4.0.4",
+        "posthtml-img-autosize": "^0.1.6"
+    },
+    "browsersList": [
+        "> 1%",
+        "last 2 versions"
+    ],
+    "devDependencies": {
+        "@babel/core": "^7.17.10",
+        "@babel/plugin-transform-runtime": "^7.17.10",
+        "@babel/preset-env": "^7.17.10",
+        "@parcel/transformer-sass": "^2.5.0",
+        "autoprefixer": "^9.8.8",
+        "babel-core": "^6.26.3",
+        "cssnano": "^5.1.7",
+        "parcel": "^2.5.0",
+        "parcel-plugin-static-files-copy": "^2.6.0",
+        "postcss-import": "^12.0.1",
+        "postcss-modules": "^4.3.1",
+        "prettier": "2.6.2",
+        "sass": "^1.51.0"
+    },
+    "resolutions": {
+        "postcss": "8"
+    },
+    "presets": [
+        [
+            "env",
+            {
+                "targets": {
+                    "browsers": [
+                        "last 2 Chrome versions"
+                    ]
+                }
+            }
+        ]
     ]
-  ],
-  "dependencies": {
-    "@babel/preset-env": "^7.17.10",
-    "@babel/runtime": "^7.17.9",
-    "cookie": "^0.5.0",
-    "express": "^4.18.1",
-    "node-sass": "^7.0.1",
-    "postcss-cli": "^9.1.0",
-    "postcss-loader": "^6.2.1"
-  },
-  "browsersList": [
-    "> 1%",
-    "last 2 versions"
-  ],
-  "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.17.10",
-    "@parcel/transformer-sass": "^2.5.0",
-    "autoprefixer": "^9.8.8",
-    "babel-core": "^6.26.3",
-    "cssnano": "^4.1.11",
-    "parcel": "^2.5.0",
-    "parcel-plugin-static-files-copy": "^2.6.0",
-    "postcss": "^8.4.13",
-    "postcss-modules": "^4.3.1",
-    "prettier": "2.6.2",
-    "sass": "^1.51.0"
-  },
-  "presets": [
-    [
-      "env",
-      {
-        "targets": {
-          "browsers": [
-            "last 2 Chrome versions"
-          ]
-        }
-      }
-    ]
-  ]
 }
