@@ -5,6 +5,8 @@ import { createElement } from './navigate';
 export const series = async() => {
 
     setTimeout(() => {
+        let searchValue;
+        let pageNumber;
         globalStore.flagger = true;
         const API_KEY = 'apikey=7035c60c';
 
@@ -19,9 +21,7 @@ export const series = async() => {
 
 
 
-        function renderSeries(movies, totalResults) {
 
-        }
         const seriesBannerWrapper = document.querySelector('.series--image--wrapper');
 
         const seriesFirstTitle = seriesBannerWrapper.querySelector('.series--image--box:first-of-type > div > h1');
@@ -49,6 +49,34 @@ export const series = async() => {
         }
         getSecondBanner();
 
+
+        const searchInput = document.querySelector('#search-input');
+
+
+        const searchSeries = async({ target }) => {
+            searchValue = target.value;
+            const { Search: series, totalResults } = await (await fetch(`https://omdbapi.com/?apikey=7035c60c&type=series&s=${searchValue}&plot=full&page=1`)).json();
+            console.log(series)
+            renderSeries(series, totalResults)
+        }
+        const serieslist = document.querySelector('.series--list');
+
+        function renderSeries(series, totalResults) {
+            series.map((series) => {
+                const seriesCard = document.createElement('li');
+
+                seriesCard.innerHTML = `
+                <h3>${series.Title}</h3>
+                <p>${series.Year}</P>
+                <img src=${series.Poster} alt=${series.Title} />
+                `
+
+                serieslist.append(seriesCard);
+            })
+        }
+        searchInput.addEventListener('change', searchSeries)
+
+
     })
 
     return createElement(`
@@ -72,6 +100,13 @@ export const series = async() => {
                     <img class="series--image" src="" alt="3">
                 </div>
             </div>
+        </section>
+        <section>
+        <ul class="series--list">
+        
+        </ul>
+        <button class="movies--button">Show More Movies</button>
+        
         </section>
     </div>
     `)
