@@ -1,27 +1,9 @@
-import {
-    globalStore,
-    Home
-} from "./Home.js";
-import {
-    Signup
-} from "./Signup.js";
-import {
-    Profile
-} from "./Profile.js";
-import {
-    Login
-} from "./Login.js";
-import {
-    Series
-} from "./Series.js";
+import { Home } from "./Home.js";
+import { Signup } from "./Signup.js";
+import { Profile } from "./Profile.js";
+import { Login } from "./Login.js";
+import { Series } from "./Series.js";
 import { homeEl } from "./main.js";
-
-
-
-const signupEl = document.querySelector('#app-contents');
-const profileEl = document.querySelector('#app-contents');
-const loginEl = document.querySelector('#app-contents');
-const seriesEl = document.querySelector('#app-contents');
 
 
 const routes = [{
@@ -46,7 +28,12 @@ const routes = [{
     }
 ]
 
+
 window.onload = () => {
+    const renderHtml = async(pathName) => {
+        const component = routes.find(route => route.path === pathName).components;
+        homeEl.replaceChildren(await component());
+    }
     const navigation = document.querySelector('.top-navigation');
     navigation.addEventListener('click', (e) => {
         if (!e.target.matches('.history')) {
@@ -58,17 +45,17 @@ window.onload = () => {
             pathName
         }, null, location.origin + pathName);
         renderHtml(pathName)
+
     })
+
+
+    renderHtml(window.location.pathname);
 }
 
 
-const renderHtml = async(pathName) => {
 
-    const component = routes.find(route => route.path === pathName).components;
-    console.log(await component());
-    homeEl.replaceChildren(await component());
 
-}
+
 
 
 //popstate는 pushState로 주소를 바꾼 뒤에 뒤로가기,앞으로가기를 했을 때 발생하는 이밴트다.
@@ -83,22 +70,6 @@ export const createElement = string => {
     return componentTemplate.content;
 };
 
-renderHtml(window.location.pathname);
-
-
 
 
 export const NotFound = () => createElement('<h1>404 NotFound</p>');
-
-// const fetchData = async url => {
-//   const res = await fetch(url);
-//   const json = await res.json();
-//   return json;
-// };
-
-
-
-
-
-
-//

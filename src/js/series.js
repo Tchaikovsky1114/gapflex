@@ -49,12 +49,12 @@ export const Series = async() => {
         }
         getSecondBanner();
 
-    }, 200)
+    })
 
     return createElement(`
     <div class="subpage--wrapper">
         <h1 class="subpage--greeting">
-        GAPFLEX pursue only the best series</h1>
+        GAPFLEX PURSUES <br/>ONLY THE BEST SERIES</h1>
         <section class="series--banner--wrapper">
             <div class="series--image--wrapper">
                 <div class="series--image--box">
@@ -74,8 +74,5 @@ export const Series = async() => {
             </div>
         </section>
     </div>
-    
     `)
-        // const { title, content } = await fetchData('/data/service.json');
-        // return createElement(`<h1>${title}</h1><p>${content}</p>`);
 };
