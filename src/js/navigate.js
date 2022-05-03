@@ -3,7 +3,7 @@ import { Signup } from "./Signup.js";
 import { Profile } from "./Profile.js";
 import { Login } from "./Login.js";
 import { Series } from "./Series.js";
-import { homeEl } from "./main.js";
+import { homeEl } from "./index.js";
 
 
 const routes = [{
@@ -30,11 +30,22 @@ const routes = [{
 
 
 window.onload = () => {
-    const renderHtml = async(pathName) => {
-        const component = routes.find(route => route.path === pathName).components;
-        homeEl.replaceChildren(await component());
-    }
     const navigation = document.querySelector('.top-navigation');
+
+
+
+
+
+
+    const renderHtml = async pathName => {
+        try {
+            const component = routes.find(route => route.path === pathName).components || Home;
+            homeEl.replaceChildren(await component());
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     navigation.addEventListener('click', (e) => {
         if (!e.target.matches('.history')) {
             return;
@@ -49,14 +60,8 @@ window.onload = () => {
     })
 
 
-    renderHtml(window.location.pathname);
+    renderHtml('/');
 }
-
-
-
-
-
-
 
 //popstate는 pushState로 주소를 바꾼 뒤에 뒤로가기,앞으로가기를 했을 때 발생하는 이밴트다.
 //pushState를 할 때 이벤트가 발생하는 것이 아니다.
