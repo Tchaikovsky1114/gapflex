@@ -9,13 +9,14 @@ export const globalStore = {
 }
 
 
-const API_KEY = 'apikey=7035c60c';
+
 
 export const home = async() => {
 
-    globalStore.flagger = false;
 
     setTimeout(() => {
+        const API_KEY = 'apikey=7035c60c';
+        globalStore.flagger = false;
         async function getData(pageNumber, searchValue = 'bourne') {
             const {
                 Search: movies,

@@ -3,8 +3,9 @@ import { createElement } from './navigate';
 
 
 export const series = async() => {
-    globalStore.flagger = true;
+
     setTimeout(() => {
+        globalStore.flagger = true;
         const API_KEY = 'apikey=7035c60c';
 
         async function getSeriesData(pageNumber, searchValue = '') {
