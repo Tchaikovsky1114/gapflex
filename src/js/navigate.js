@@ -6,30 +6,34 @@ import { series } from "./series.js";
 import { homeEl } from "./index.js";
 
 
-const routes = [{
-        path: '/',
-        components: home
-    },
-    {
-        path: '/series',
-        components: series
-    },
-    {
-        path: '/signup',
-        components: signup
-    },
-    {
-        path: '/login',
-        components: login
-    },
-    {
-        path: '/profile',
-        components: profile
-    }
-]
+
 
 
 window.onload = () => {
+
+
+    const routes = [{
+            path: '/',
+            components: home
+        },
+        {
+            path: '/series',
+            components: series
+        },
+        {
+            path: '/signup',
+            components: signup
+        },
+        {
+            path: '/login',
+            components: login
+        },
+        {
+            path: '/profile',
+            components: profile
+        }
+    ]
+
     const navigation = document.querySelector('.top-navigation');
 
 
