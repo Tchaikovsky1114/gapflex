@@ -1,30 +1,30 @@
-import { Home } from "./Home";
-import { Signup } from "./Signup.js";
-import { Profile } from "./Profile.js";
-import { Login } from "./Login.js";
-import { Series } from "./Series.js";
+import { home } from "./home";
+import { signup } from "./signup.js";
+import { profile } from "./profile.js";
+import { login } from "./login.js";
+import { series } from "./series.js";
 import { homeEl } from "./index.js";
 
 
 const routes = [{
         path: '/',
-        components: Home
+        components: home
     },
     {
         path: '/series',
-        components: Series
+        components: series
     },
     {
         path: '/signup',
-        components: Signup
+        components: signup
     },
     {
         path: '/login',
-        components: Login
+        components: login
     },
     {
         path: '/profile',
-        components: Profile
+        components: profile
     }
 ]
 
@@ -39,7 +39,7 @@ window.onload = () => {
 
     const renderHtml = async pathName => {
         try {
-            const component = routes.find(route => route.path === pathName).components || Home;
+            const component = routes.find(route => route.path === pathName).components || home;
             homeEl.replaceChildren(await component());
         } catch (err) {
             console.error(err);

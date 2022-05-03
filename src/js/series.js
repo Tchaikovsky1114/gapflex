@@ -1,9 +1,9 @@
 import 'regenerator-runtime/runtime'
-import { globalStore } from './Home';
+import { globalStore } from './home';
 import { createElement } from './navigate';
 
 
-export const Series = async() => {
+export const series = async() => {
     globalStore.flagger = true;
     setTimeout(() => {
         const API_KEY = 'apikey=7035c60c';

@@ -1,6 +1,6 @@
 import { globalStore } from "./Home";
 
-export const Profile = async() => {
+export const profile = async() => {
     globalStore.flagger = true;
     return "MyPage"
         // const { title, content } = await fetchData('/data/about.json');

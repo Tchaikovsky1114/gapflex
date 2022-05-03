@@ -11,7 +11,7 @@ export const globalStore = {
 
 const API_KEY = 'apikey=7035c60c';
 
-export const Home = async() => {
+export const home = async() => {
 
     globalStore.flagger = false;
 

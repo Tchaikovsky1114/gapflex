@@ -1,6 +1,6 @@
-import { globalStore } from "./Home";
+import { globalStore } from "./home";
 
-export const Signup = async() => {
+export const signup = async() => {
 
     return "Signup"
         // const { title, content } = await fetchData('/data/about.json');
