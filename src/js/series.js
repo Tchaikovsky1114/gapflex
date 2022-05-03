@@ -2,11 +2,12 @@ import 'regenerator-runtime/runtime'
 import { globalStore } from './Home';
 import { createElement } from './navigate';
 
-const API_KEY = 'apikey=7035c60c';
 
 export const Series = async() => {
     globalStore.flagger = true;
     setTimeout(() => {
+        const API_KEY = 'apikey=7035c60c';
+
         async function getSeriesData(pageNumber, searchValue = '') {
             const { Search: movies, totalResults } = await (await fetch(`https://www.omdbapi.com/?apikey=7035c60c&type=series&plot=full&s=${searchValue}&page=${pageNumber}`)).json();
 
@@ -52,7 +53,8 @@ export const Series = async() => {
 
     return createElement(`
     <div class="subpage--wrapper">
-        <h1 class="subpage--greeting">We have collected only the best series</h1>
+        <h1 class="subpage--greeting">
+        GAPFLEX pursue only the best series</h1>
         <section class="series--banner--wrapper">
             <div class="series--image--wrapper">
                 <div class="series--image--box">

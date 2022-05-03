@@ -9,49 +9,48 @@ export const globalStore = {
 }
 
 
-
+const API_KEY = 'apikey=7035c60c';
 
 export const Home = async() => {
+
     globalStore.flagger = false;
+
     setTimeout(() => {
-
-
-        const API_KEY = 'apikey=7035c60c';
-        const callMoreMovieButton = document.querySelector('.movies--button');
-
-
         async function getData(pageNumber, searchValue = 'bourne') {
-            const {
-                Search: movies,
-                totalResults
-            } = await (await fetch(`https://www.omdbapi.com?${API_KEY}&s=${searchValue}&page=${pageNumber}`)).json();
-
+            const { Search: movies, totalResults } = await (await fetch(`https://www.omdbapi.com?${API_KEY}&s=${searchValue}&page=${pageNumber}`)).json();
             renderMovies(movies, totalResults);
-
             if (pageNumber * 10 < totalResults || totalResults < 10) {
                 searchedResultCount(totalResults, searchValue);
             }
-            console.log(totalResults);
+
+            console.log(renderMovies);
         }
+        const callMoreMovieButton = document.querySelector('.movies--button');
 
         const movielist = document.querySelector('.movies--list')
+
         const renderMovies = (movies = 'bourne', totalResults) => {
-            console.log("rendermovie start");
-            [...movies].forEach((movie, i) => {
+
+            movies.map((movie, i) => {
                 if (i < totalResults) {
                     const movieEl = document.createElement('li');
                     const movieImg = document.createElement('img');
                     movieImg.setAttribute('src', `${movie.Poster}`);
                     movieImg.setAttribute('alt', `${movie.Title}`);
+
                     movieEl.innerHTML = `
-    <div class="movie--title"><p><span>${movie.Title}</span></p></div>
-    <div class=""movie--release--year> released in <span>${movie.Year}</span></div>
-    `;
-                    movieEl.appendChild(movieImg);
-                    movielist.appendChild(movieEl);
+                    <div class="movie--title"><p><span>${movie.Title}</span></p></div>
+                    <div class=""movie--release--year> released in <span>${movie.Year}</span></div>
+                    `;
+                    movielist.append(movieEl);
+                    movieEl.append(movieImg);
+
                 }
             });
         };
+
+
+
 
         const moviesCount = document.querySelector('.movies--count');
         const resultCount = document.createElement('div');
@@ -134,6 +133,7 @@ export const Home = async() => {
             console.log("pauseButton");
             globalStore.flagger = true;
         });
+
         playButton.addEventListener('click', () => {
             console.log("playButton");
             globalStore.flagger = false;
@@ -149,8 +149,8 @@ export const Home = async() => {
   
   <img class="silde--image" src="https://m.media-amazon.com/images/M/MV5BNGNiNmU2YTMtZmU4OS00MjM0LTlmYWUtMjVlYjAzYjE2N2RjXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SX300.jpg" alt="Bourne Series">
   <div class="button--group">
-    <button>상세보기</button>
-    <button>기능생각중</button>
+    <button>Preview</button>
+    <button>Actors</button>
   </div>
 </div>
 <div class="slide">
@@ -158,8 +158,8 @@ export const Home = async() => {
   
   <img class="silde--image" src="https://m.media-amazon.com/images/M/MV5BNGJlYjVkMjQtN2NlZC00NTJhLThmZjItMTRlZDczMmE3YmI3XkEyXkFqcGdeQXVyMzI0NDc4ODY@._V1_SX300.jpg" alt="Bourne Series">
   <div class="button--group">
-    <button>상세보기</button>
-    <button>기능생각중</button>
+    <button>Preview</button>
+    <button>Actors</button>
   </div>
 </div>
 <div class="slide">
@@ -167,8 +167,8 @@ export const Home = async() => {
   
   <img class="silde--image" src="https://m.media-amazon.com/images/M/MV5BYTIyMDFmMmItMWQzYy00MjBiLTg2M2UtM2JiNDRhOWE4NjBhXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg" alt="Bourne Series">
   <div class="button--group">
-    <button>상세보기</button>
-    <button>기능생각중</button>
+    <button>Preview</button>
+    <button>Actors</button>
   </div>
 </div>
 <div class="slide">
@@ -176,8 +176,8 @@ export const Home = async() => {
   
   <img class="silde--image" src="https://m.media-amazon.com/images/M/MV5BY2NjMTg2YTctZjJlMy00MzA1LWE5NDAtMjhkZGU4ODhkYjFhXkEyXkFqcGdeQXVyNjg1ODU5MTU@._V1_SX300.jpg" alt="Bourne Series">
   <div class="button--group">
-    <button>상세보기</button>
-    <button>기능생각중</button>
+    <button>Preview</button>
+    <button>Actors</button>
   </div>
 </div>
 <div class="slide">
@@ -185,8 +185,8 @@ export const Home = async() => {
   
   <img class="silde--image" src="https://m.media-amazon.com/images/M/MV5BNGRlY2JmZWItZWFkMC00YTI3LWFhZTEtNjIwMTY3MzIzMDk5XkEyXkFqcGdeQXVyNTk5Nzg0MDE@._V1_SX300.jpg" alt="Bourne Series">
   <div class="button--group">
-    <button>상세보기</button>
-    <button>기능생각중</button>
+    <button>Preview</button>
+    <button>Actors</button>
   </div>
 </div>
 
@@ -270,26 +270,7 @@ export const Home = async() => {
 //         const movielist = document.querySelector('.movies--list');
 
 
-//         const renderMovies = (movies = 'bourne', totalResults = 100) => {
-//             [...movies].forEach((movie, i) => {
-//                 if (i < totalResults) {
-//                     const movieEl = document.createElement('li');
-//                     const movieImg = document.createElement('img');
-//                     movieImg.setAttribute('src', `${movie.Poster}`);
-//                     movieImg.setAttribute('alt', `${movie.Title}`);
-//                     console.log(movieEl);
-//                     console.log(movieImg);
-//                     movieEl.innerHTML = `
-// <div class="movie--title"><p><span>${movie.Title}</span></p></div>
-// <div class=""movie--release--year> released in <span>${movie.Year}</span></div>
-// `;
-//                     console.log(movieEl.textContent);
-//                     movieEl.append(movieImg);
-//                     movielist.append(movieEl);
-//                     console.log(movielist);
-//                 }
-//             });
-//         };
+
 
 //         const callMoreMovieButton = document.querySelector('.movies--button');
 //         const searchIcon = document.querySelector('#search-icon');
@@ -336,7 +317,7 @@ export const Home = async() => {
 //     <img class="silde--image" src="https://m.media-amazon.com/images/M/MV5BNGNiNmU2YTMtZmU4OS00MjM0LTlmYWUtMjVlYjAzYjE2N2RjXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SX300.jpg" alt="Bourne Series">
 //     <div class="button--group">
 //       <button>상세보기</button>
-//       <button>기능생각중</button>
+//       <button>cast actors</button>
 //     </div>
 //   </div>
 //   <div class="slide">
@@ -345,7 +326,7 @@ export const Home = async() => {
 //     <img class="silde--image" src="https://m.media-amazon.com/images/M/MV5BNGJlYjVkMjQtN2NlZC00NTJhLThmZjItMTRlZDczMmE3YmI3XkEyXkFqcGdeQXVyMzI0NDc4ODY@._V1_SX300.jpg" alt="Bourne Series">
 //     <div class="button--group">
 //       <button>상세보기</button>
-//       <button>기능생각중</button>
+//       <button>cast actors</button>
 //     </div>
 //   </div>
 //   <div class="slide">
@@ -354,7 +335,7 @@ export const Home = async() => {
 //     <img class="silde--image" src="https://m.media-amazon.com/images/M/MV5BYTIyMDFmMmItMWQzYy00MjBiLTg2M2UtM2JiNDRhOWE4NjBhXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg" alt="Bourne Series">
 //     <div class="button--group">
 //       <button>상세보기</button>
-//       <button>기능생각중</button>
+//       <button>cast actors</button>
 //     </div>
 //   </div>
 //   <div class="slide">

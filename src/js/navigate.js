@@ -13,7 +13,7 @@ import {
 } from "./Login";
 import {
     Series
-} from "./Series";
+} from "./series";
 import { homeEl } from "./main.js";
 
 
