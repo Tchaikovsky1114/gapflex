@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime'
 import { globalStore } from './home';
 import { createElement } from './navigate';
 
