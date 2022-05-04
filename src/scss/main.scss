@@ -1,3 +1,4 @@
+
 @import 'config';
 @import './series.scss';
 h1 {
@@ -28,6 +29,62 @@ li {
     list-style-type: none;
 }
 
+.synopsis--wrapper{
+    transition: .2s;
+}
+
+.hide{
+    opacity: 0;
+}
+
+
+.synopsis{
+    width: 500px;
+    position: absolute;
+    top:140px;
+    z-index: 9;
+    right:20px;
+    background-clip: text;  
+  -webkit-background-clip: text;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: clamp( 2em, 2vw, 3rem);
+  grid-area: overlap;
+  letter-spacing: 1px;
+  -webkit-text-stroke: 4px transparent;
+    
+    padding: 1rem;
+    p{  
+        text-align: center;
+        padding:0.875rem; 
+        border-bottom: 1px solid;
+    }
+}
+
+.synopsis.bg{
+    
+    background-image: repeating-linear-gradient( 105deg, 
+    var(--gold) 0% , 
+    var(--dark-shadow) 5%,
+    var(--gold) 12%);
+  color: transparent;
+  filter: drop-shadow(5px 5px 15px #a8a8a8);
+  transform: scaleY(1.02);
+  transform-origin: top;
+}
+.synopsis.fg{
+
+    background-image: repeating-linear-gradient( 5deg,  
+    var(--gold) 25% , 
+    var(--light-shadow) 23%, 
+    var(--gold) 25%);
+  color: white;
+  transform: scale(1);
+}
+
+
+
+
 #app-contents {}
 
 .slider {
@@ -41,7 +98,7 @@ li {
     .slide {
         position: relative;
         width: 100%;
-        height: 720px;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -53,12 +110,18 @@ li {
         border-radius: 5px;
         color: #fff;
         img {
-            width: 100%;
-            height: 100%;
-            display: block;
             position: absolute;
-            background-attachment: fixed;
-            filter: blur(1px) grayscale(30%);
+            width:50%;
+            height: 100%;
+            top:0;
+            left:0;
+            
+            display: block;
+            border-radius: 0 0 20px 20px;
+            image-rendering: -webkit-optimize-contrast;
+            transform: translateZ(0);
+            
+            backface-visibility: hidden;
         }
         h3 {
             position: absolute;
@@ -154,6 +217,12 @@ li {
             justify-content: center;
             align-items: center;
             position: absolute;
+            .search-button {
+                opacity: 0;
+                left: 100px;
+                position: absolute;
+                font-size: 14px;
+            }
             #search-icon {
                 position: absolute;
                 border: 0;
@@ -192,6 +261,10 @@ li {
                 outline: none;
                 transform: scaleX(1);
                 background-color: #fff;
+            }
+            input:focus~.search-button {
+                transition: 2s;
+                opacity: 1;
             }
         }
     }

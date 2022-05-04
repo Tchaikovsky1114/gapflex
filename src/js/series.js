@@ -1,5 +1,6 @@
-import { globalStore } from './home';
-import { createElement } from './navigate';
+import { globalStore } from './home.js';
+import { createElement } from './navigate.js';
+import dotenv from 'dotenv'
 
 
 export const series = async() => {
@@ -8,10 +9,10 @@ export const series = async() => {
         let searchValue;
         let pageNumber;
         globalStore.flagger = true;
-        const API_KEY = 'apikey=7035c60c';
+        
 
         async function getSeriesData(pageNumber, searchValue = '') {
-            const { Search: movies, totalResults } = await (await fetch(`https://www.omdbapi.com/?apikey=7035c60c&type=series&plot=full&s=${searchValue}&page=${pageNumber}`)).json();
+            const { Search: movies, totalResults } = await (await fetch(`https://www.omdbapi.com/?apikey=${process.env.API_KEY}&type=series&plot=full&s=${searchValue}&page=${pageNumber}`)).json();
 
             if (pageNumber * 10 < totalResults || totalResults < 10) {
                 searchedResultCount(totalResults, searchValue);
@@ -33,7 +34,7 @@ export const series = async() => {
         const seriesSecondRelease = seriesBannerWrapper.querySelector('.series--image--box:nth-of-type(2) >div > p')
 
         async function getFirstBanner() {
-            const { Search: series } = await (await fetch(`https://omdbapi.com/?apikey=7035c60c&type=movie&plot=full&s=barbershop&page=1`)).json();
+            const { Search: series } = await (await fetch(`https://omdbapi.com/?apikey=${process.env.API_KEY}&type=movie&plot=full&s=barbershop&page=1`)).json();
             seriesFirstTitle.innerHTML = `${series[1].Title}`;
             seriesFirstImg.setAttribute('src', `${series[1].Poster}`)
             seriesFirstRelease.innerHTML = `${series[1].Year}`
@@ -42,7 +43,7 @@ export const series = async() => {
 
 
         async function getSecondBanner() {
-            const { Search: series } = await (await fetch(`https://omdbapi.com/?apikey=7035c60c&type=series&plot=full&s=brooklyn&page=1`)).json();
+            const { Search: series } = await (await fetch(`https://omdbapi.com/?apikey=${process.env.API_KEY}&type=series&plot=full&s=brooklyn&page=1`)).json();
             seriesSecondTitle.innerHTML = `${series[0].Title}`;
             seriesSecondImg.setAttribute('src', `${series[0].Poster}`)
             seriesSecondRelease.innerHTML = `${series[0].Year}`
@@ -55,7 +56,7 @@ export const series = async() => {
 
         const searchSeries = async({ target }) => {
             searchValue = target.value;
-            const { Search: series, totalResults } = await (await fetch(`https://omdbapi.com/?apikey=7035c60c&type=series&s=${searchValue}&plot=full&page=1`)).json();
+            const { Search: series, totalResults } = await (await fetch(`https://omdbapi.com/?apikey=${process.env.API_KEY}&type=series&s=${searchValue}&plot=full&page=1`)).json();
             console.log(series)
             renderSeries(series, totalResults)
         }
@@ -82,7 +83,7 @@ export const series = async() => {
     return createElement(`
     <div class="subpage--wrapper">
         <h1 class="subpage--greeting">
-        GAPFLEX PURSUES <br/>ONLY THE BEST SERIES</h1>
+        GAPFLEX <br/> The Best Series</h1>
         <section class="series--banner--wrapper">
             <div class="series--image--wrapper">
                 <div class="series--image--box">

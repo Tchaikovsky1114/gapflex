@@ -43,7 +43,8 @@ window.onload = () => {
 
     const renderHtml = async pathName => {
         try {
-            const component = routes.find(route => route.path === pathName).components || home;
+            const component = routes.find(route => route.path === pathName)?.components || home;
+
             homeEl.replaceChildren(await component());
         } catch (err) {
             console.error(err);
