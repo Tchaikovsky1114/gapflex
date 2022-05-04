@@ -30,9 +30,15 @@ li {
 }
 
 .synopsis--wrapper {
+  
   transition: 0.2s;
 }
-
+.fg{
+  transition: 1s;
+}
+.bg{
+  transition: 1s;
+}
 .hide {
   opacity: 0;
 }
@@ -313,6 +319,7 @@ li {
 }
 
 .movies--list {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -321,39 +328,76 @@ li {
   padding: 1rem;
   border-top: 3px solid rgba(223, 190, 106, 0.8);
   li {
-    max-width: fit-content;
-    min-width: fit-content;
+    width:25%;
+    height: 250px;
+    will-change: transform;
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     gap: 10px;
     border: 1px solid #b13;
     padding: 1rem;
     border-radius: 5px;
     box-shadow: 2px 2px 1px #fff;
+    overflow: hidden;
     cursor: pointer;
     transition: 0.4s;
+    &:hover .movie--title{
+      z-index: 2;
+      opacity: 1;
+      color: rgb(223, 100, 1);
+    }
+    &:hover .movie--release--year{
+      color: rgb(223, 100, 1);
+      z-index: 2;
+      opacity: 1;
+    }
     &:hover {
       transform: translateY(-5px);
       box-shadow: 2px 2px 3px #b13;
     }
+
+  }
+  .movie--release--year{
+    opacity: 0;
+    position:absolute;
+    top: 60px;
+    transition: .5s;
+  }
+  .movie--title{
+    opacity: 0;
+    transition: .5s;
     p {
-      max-width: 320px;
+      max-width: 500px;
+      position: absolute;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       font-weight: bold;
+      z-index: 2;
       span {
-        font-size: 24px;
+        display: block;
+        font-size: 28px;
+        z-index: 1;
+        bottom:0;
       }
     }
+    
   }
   img {
-    display: block;
-    width: 20.25rem;
-    height: 16rem;
-    border-radius: 30px;
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    position:absolute;
+    top:0;
+    left:0;
+    transition: transform .3s;
+    &:hover{
+      filter: grayscale(80%);
+      transform: scale(1.1);
+    }
   }
 }
 

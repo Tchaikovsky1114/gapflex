@@ -46,7 +46,7 @@ export default async (homeEl) => {
   const component = createElement( /* html */ `
   <div class="synopsis--wrapper hide">
   <div class="synopsis bg"><p>Bourne:Synopsis</p>In Jason Bourne, Bourne remains on the run from CIA hit squads as he tries to uncover hidden truths about his father, while CIA director Robert Dewey orders the head of cyber-security Heather Lee to hunt him down. </div>
-  <div class="synopsis fg"><p>Bourne:Synopsis</p><span>In Jason Bourne</span>, Bourne remains on the run from CIA hit squads as he tries to uncover hidden truths about his father, while CIA director Robert Dewey orders the head of cyber-security Heather Lee to hunt him down. </div>
+  <div class="synopsis fg"><p>Bourne:Synopsis</p>In Jason Bourne, Bourne remains on the run from CIA hit squads as he tries to uncover hidden truths about his father, while CIA director Robert Dewey orders the head of cyber-security Heather Lee to hunt him down. </div>
   </div>
   
 <div class="button--group">
@@ -170,10 +170,11 @@ function renderMovies(movies = 'bourne', totalResults){
       const movieImg = document.createElement('img');
       movieImg.setAttribute('src', `${movie.Poster}`);
       movieImg.setAttribute('alt', `${movie.Title}`);
+      movieEl.classList.add('movie--card');
 
       movieEl.innerHTML = `
                 <div class="movie--title"><p><span>${movie.Title}</span></p></div>
-                <div class=""movie--release--year> released in <span>${movie.Year}</span></div>
+                <div class="movie--release--year"> released in <span>${movie.Year}</span></div>
                 `;
       movielist.append(movieEl);
       movieEl.append(movieImg);
@@ -197,6 +198,7 @@ function searchedResultCount(totalResults, searchValue){
 };
 
 function afterRender() {
+  const movielist = document.querySelector('.movies--list')
   const callMoreMovieButton = document.querySelector('.movies--button');
   let searchResult;
   let pageNumber = 1;
@@ -245,14 +247,39 @@ function afterRender() {
 
   const synopsisToggleEl = document.querySelector('.synopsis--button')
   const synopsisEl = document.querySelector('.synopsis--wrapper');
-
+  const actorsToggle = document.querySelector('.actors--button');
   function handleSynopsis() {
-    synopsisEl.classList.toggle('hide')
-    console.log("synopsisToggle here")
+    synopsisEl.classList.remove('hide')
+    synopsisEl.innerHTML = /* html */`
+    <div class="synopsis bg"><p>Bourne:Synopsis</p>In Jason Bourne, Bourne remains on the run from CIA hit squads as he tries to uncover hidden truths about his father, while CIA director Robert Dewey orders the head of cyber-security Heather Lee to hunt him down. </div>
+  <div class="synopsis fg"><p>Bourne:Synopsis</p>In Jason Bourne, Bourne remains on the run from CIA hit squads as he tries to uncover hidden truths about his father, while CIA director Robert Dewey orders the head of cyber-security Heather Lee to hunt him down. </div>
+    `
   }
   
   synopsisToggleEl.addEventListener('click', handleSynopsis)
     
   
+  
+  function handleActors(){
+    synopsisEl.classList.remove('hide')
+    synopsisEl.innerHTML = /* html */`
+    <div class="synopsis bg"><p>Bourne:Actors</p>
+  <p>Jason Bourne - Matt Damon</p>
+  <p>Rachel Weisz - Mata Sierring</p>
+  <p>Marie Helena Kreuts -Franka Potente </p>
+  <p>Nicky Parsons - Julia Stiles</p>
+  <p>Ward Abbott - Brian Cox </p>
+</div>
+<div class="synopsis fg"><p>Bourne Series:Actors</p>
+  <p>Jason Bourne - Matt Damon</p>
+  <p>Rachel Weisz - Mata Sierring</p>
+  <p>Marie Helena Kreuts -Franka Potente </p>
+  <p>Nicky Parsons - Julia Stiles</p>
+  <p>Ward Abbott - Brian Cox </p>
+</div>
+    `
+  }
+
+  actorsToggle.addEventListener('click',handleActors);
   
 }
