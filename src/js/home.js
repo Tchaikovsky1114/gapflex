@@ -1,32 +1,14 @@
 import {
   createElement
 } from "./navigate.js";
-import dotenv from 'dotenv'
+
+
 
 
 
 export const globalStore = {
   flagger: false
 }
-
-
-// async function getData(pageNumber, searchValue = 'bourne') {
-//   const {
-//     Search: movies,
-//     totalResults
-//   } = await (await fetch(`https://www.omdbapi.com?${process.env.API_KEY}&s=${searchValue}&page=${pageNumber}`)).json();
-//   renderMovies(movies, totalResults);
-//   if (pageNumber * 10 < totalResults || totalResults < 10) {
-//     searchedResultCount(totalResults, searchValue);
-//   }
-// }
-
-
-
-// let searchResult;
-// let pageNumber = 1;
-
-
 
 const fetchData = async (pageNumber = 1, searchValue = 'bourne') => {
   const res = await fetch(`https://www.omdbapi.com?apikey=${process.env.API_KEY}&s=${searchValue}&page=${pageNumber}`);
@@ -35,66 +17,67 @@ const fetchData = async (pageNumber = 1, searchValue = 'bourne') => {
   return json;
 }
 
-window.onload = () => {}
 
-export const home = async () => {
+// //상태 : 데이터 (값,명사)
+// const state = {
+//   a: 1
+// }
+// //액션 : 데이터를 조정하는 동작(동사)
+// const actions = {
+//   getData() {
+//     state.a = 2
+//   }
+// }
+// function getData() {
+//   // state.a
+// }
+
+export default async (homeEl) => {
   globalStore.flagger = false;
 
-  const {Search: movies, totalResults} = await fetchData()
+  const {
+    Search: movies,
+    totalResults
+  } = await fetchData()
 
-  console.log(movies,totalResults);
+  console.log(movies, totalResults);
 
-  const component = createElement(`
+  // comment tagged 사용
+  const component = createElement( /* html */ `
   <div class="synopsis--wrapper hide">
-  <div class="synopsis bg"><p>Synopsis</p>In Jason Bourne, Bourne remains on the run from CIA hit squads as he tries to uncover hidden truths about his father, while CIA director Robert Dewey orders the head of cyber-security Heather Lee to hunt him down. </div>
-  <div class="synopsis fg"><p>Synopsis</p><span>In Jason Bourne</span>, Bourne remains on the run from CIA hit squads as he tries to uncover hidden truths about his father, while CIA director Robert Dewey orders the head of cyber-security Heather Lee to hunt him down. </div>
+  <div class="synopsis bg"><p>Bourne:Synopsis</p>In Jason Bourne, Bourne remains on the run from CIA hit squads as he tries to uncover hidden truths about his father, while CIA director Robert Dewey orders the head of cyber-security Heather Lee to hunt him down. </div>
+  <div class="synopsis fg"><p>Bourne:Synopsis</p><span>In Jason Bourne</span>, Bourne remains on the run from CIA hit squads as he tries to uncover hidden truths about his father, while CIA director Robert Dewey orders the head of cyber-security Heather Lee to hunt him down. </div>
   </div>
-  <div class="slider">
-<div class="slide first--slide showing">
-<h3>Monthly Recommend Movie Series<br/>:The Bourne Series</h3>
-
-<img class="silde--image" src=${movies[0].Poster} alt="Bourne Series">
-
+  
 <div class="button--group">
   <button class="synopsis--button">Synopsis</button>
   <button class="actors--button">Actors</button>
 </div>
+  <div class="slider">
+
+<div class="slide first--slide showing">
+<h3>Monthly Recommend Movie Series<br/>:The Bourne Series</h3>
+<img class="silde--image" src=${movies[0].Poster} alt="Bourne Series">
 </div>
+
 <div class="slide">
 <h3>Monthly Recommend Movie Series<br/><span>:The Bourne Series</span></h3>
-
 <img class="silde--image" src=${movies[2].Poster} alt="Bourne Series">
-<div class="button--group">
-  <button>Synopsis</button>
-  <button>Actors</button>
 </div>
-</div>
+
 <div class="slide">
 <h3>Monthly Recommend Movie Series<br/><span>:The Bourne Series</span></h3>
-
 <img class="silde--image" src=${movies[3].Poster} alt="Bourne Series">
-<div class="button--group">
-  <button>Synopsis</button>
-  <button>Actors</button>
 </div>
-</div>
+
 <div class="slide">
 <h3>Monthly Recommend Movie Series<br/><span>:The Bourne Series</span></h3>
-
 <img class="silde--image" src=${movies[4].Poster} alt="Bourne Series">
-<div class="button--group">
-  <button>Synopsis</button>
-  <button>Actors</button>
 </div>
-</div>
+
 <div class="slide">
 <h3>Monthly Recommend Movie Series<br/><span>:The Bourne Series</span></h3>
-
 <img class="silde--image" src=${movies[6].Poster} alt="Bourne Series">
-<div class="button--group">
-  <button>Synopsis</button>
-  <button>Actors</button>
-</div>
 </div>
 
 </div>
@@ -130,91 +113,91 @@ export const home = async () => {
 
 
 
-const SHOWING = 'showing';
+  const SHOWING = 'showing';
 
 
-function onSlide() {
-  const autoplayBanner = setInterval(() => {
-    if (globalStore.flagger) {
-      return;
-    }
-    const currentSlide = document.querySelector(`.${SHOWING}`);
-    console.log('start!');
-    if (currentSlide) {
-      const nextSlide = currentSlide.nextElementSibling;
-      currentSlide.classList.remove(SHOWING);
-      if (nextSlide) {
-        nextSlide.classList.add(SHOWING);
+  function onSlide() {
+    const autoplayBanner = setInterval(() => {
+      if (globalStore.flagger) {
+        return;
       }
-      if (!nextSlide) {
-        const firstSilder = document.querySelector('.first--slide');
-        firstSilder.classList.toggle(SHOWING);
+      const currentSlide = document.querySelector(`.${SHOWING}`);
+      console.log('start!');
+      if (currentSlide) {
+        const nextSlide = currentSlide.nextElementSibling;
+        currentSlide.classList.remove(SHOWING);
+        if (nextSlide) {
+          nextSlide.classList.add(SHOWING);
+        }
+        if (!nextSlide) {
+          const firstSilder = document.querySelector('.first--slide');
+          firstSilder.classList.toggle(SHOWING);
+        }
+      } else {
+
+        firstSilder.classList.add(SHOWING);
+        autoplayBanner();
+        clearInterval(autoplayBanner);
       }
-    } else {
-      
-      firstSilder.classList.add(SHOWING);
-      autoplayBanner();
-      clearInterval(autoplayBanner);
-    }
-  }, 10000);
-}
-onSlide();
-
-
-
-
-
-
-
-setTimeout(()=>{
-  async function getData(pageNumber, searchValue = 'bourne') {
-    const {
-      Search: movies,
-      totalResults
-    } = await (await fetch(`https://www.omdbapi.com?apikey=${process.env.API_KEY}&s=${searchValue}&page=${pageNumber}`)).json();
-    renderMovies(movies, totalResults);
-    if (pageNumber * 10 < totalResults || totalResults < 10) {
-      searchedResultCount(totalResults, searchValue);
-    }
+    }, 10000);
   }
-  const callMoreMovieButton = document.querySelector('.movies--button');
+  onSlide();
 
+  homeEl.innerHTML = ''
+  homeEl.append(component)
+  afterRender()
+};
+
+
+
+
+async function getData(pageNumber, searchValue = 'bourne') {
+  const {
+    Search: movies,
+    totalResults
+  } = await (await fetch(`https://www.omdbapi.com?apikey=${process.env.API_KEY}&s=${searchValue}&page=${pageNumber}`)).json();
+  renderMovies(movies, totalResults);
+  if (pageNumber * 10 < totalResults || totalResults < 10) {
+    searchedResultCount(totalResults, searchValue);
+  }
+}
+
+function renderMovies(movies = 'bourne', totalResults){
   const movielist = document.querySelector('.movies--list')
+  movies.map((movie, i) => {
+    if (i < totalResults) {
+      const movieEl = document.createElement('li');
+      const movieImg = document.createElement('img');
+      movieImg.setAttribute('src', `${movie.Poster}`);
+      movieImg.setAttribute('alt', `${movie.Title}`);
 
-  const renderMovies = (movies = 'bourne', totalResults) => {
+      movieEl.innerHTML = `
+                <div class="movie--title"><p><span>${movie.Title}</span></p></div>
+                <div class=""movie--release--year> released in <span>${movie.Year}</span></div>
+                `;
+      movielist.append(movieEl);
+      movieEl.append(movieImg);
 
-    movies.map((movie, i) => {
-      if (i < totalResults) {
-        const movieEl = document.createElement('li');
-        const movieImg = document.createElement('img');
-        movieImg.setAttribute('src', `${movie.Poster}`);
-        movieImg.setAttribute('alt', `${movie.Title}`);
-
-        movieEl.innerHTML = `
-                    <div class="movie--title"><p><span>${movie.Title}</span></p></div>
-                    <div class=""movie--release--year> released in <span>${movie.Year}</span></div>
-                    `;
-        movielist.append(movieEl);
-        movieEl.append(movieImg);
-
-      }
-    });
-  };
-
+    }
+  });
+};
+function searchedResultCount(totalResults, searchValue){
   const moviesCount = document.querySelector('.movies--count');
   const resultCount = document.createElement('div');
 
-  const searchedResultCount = (totalResults, searchValue) => {
-    resultCount.classList.add('movies--result')
-    if (moviesCount.hasChildNodes()) {
-      resultCount.textContent = '';
-      resultCount.textContent = `There are "${totalResults}" total result for your "${searchValue.toUpperCase()}" search. `;
-    } else {
-      resultCount.textContent = '';
-      resultCount.textContent = `There are "${totalResults}" total result for your "${searchValue.toUpperCase()}" search. `;
-      moviesCount.append(resultCount);
-    }
-  };
+  resultCount.classList.add('movies--result')
+  if (moviesCount.hasChildNodes()) {
+    resultCount.textContent = '';
+    resultCount.textContent = `There are "${totalResults}" total result for your "${searchValue.toUpperCase()}" search. `;
+  } else {
+    resultCount.textContent = '';
+    resultCount.textContent = `There are "${totalResults}" total result for your "${searchValue.toUpperCase()}" search. `;
+    moviesCount.append(resultCount);
+  }
+};
+
+function afterRender() {
+  const callMoreMovieButton = document.querySelector('.movies--button');
   let searchResult;
   let pageNumber = 1;
   const handleSearch = (e) => {
@@ -245,7 +228,7 @@ setTimeout(()=>{
 
   searchIcon.addEventListener('click', handleInput);
 
- 
+
   const pauseButton = document.querySelector('.pause-button');
   const playButton = document.querySelector('.play-button');
 
@@ -259,24 +242,17 @@ setTimeout(()=>{
     console.log("playButton");
     globalStore.flagger = false;
   });
-  
-  const synopsisToggle = document.querySelector('.synopsis--button')
+
+  const synopsisToggleEl = document.querySelector('.synopsis--button')
   const synopsisEl = document.querySelector('.synopsis--wrapper');
-  
-  console.log(synopsisEl,synopsisToggle);
-  
+
   function handleSynopsis() {
     synopsisEl.classList.toggle('hide')
-    console.log("hihi")
-  }
-  if(synopsisToggle){
-  synopsisToggle.addEventListener('click', handleSynopsis)
-  console.log("synopsisToggle here")
+    console.log("synopsisToggle here")
   }
   
-
-},500)
-
+  synopsisToggleEl.addEventListener('click', handleSynopsis)
+    
   
-  return component;
-};
+  
+}

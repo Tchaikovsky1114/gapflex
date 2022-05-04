@@ -1,4 +1,4 @@
-import { globalStore } from "./home";
+import { globalStore } from "./Home.js";
 
 export const login = async() => {
 

@@ -1,4 +1,4 @@
-import { globalStore } from "./home";
+import { globalStore } from "./Home";
 
 export const profile = async() => {
     globalStore.flagger = true;
