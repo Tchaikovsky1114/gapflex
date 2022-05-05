@@ -4,8 +4,7 @@ import {
 import {
     createElement
 } from './navigate.js';
-import dotenv from 'dotenv'
-
+import {API_KEY} from './Home'
 
 export default async (homeEl) => {
 
@@ -59,7 +58,7 @@ async function getFirstBanner() {
 
     const {
         Search: series
-    } = await (await fetch(`https://omdbapi.com/?apikey=${process.env.API_KEY}&type=movie&plot=full&s=barbershop&page=1`)).json();
+    } = await (await fetch(`https://omdbapi.com/?apikey=${API_KEY}&type=movie&plot=full&s=barbershop&page=1`)).json();
 
     seriesFirstTitle.innerHTML = `${series[1].Title}`;
     seriesFirstImg.setAttribute('src', `${series[1].Poster}`)
@@ -72,7 +71,7 @@ async function getSecondBanner() {
     const seriesSecondImg = seriesBannerWrapper.querySelector('.series--poster--box:nth-of-type(2) > img')
     const seriesSecondRelease = seriesBannerWrapper.querySelector('.series--poster--box:nth-of-type(2) >div > p')
 
-    const {Search: series} = await (await fetch(`https://omdbapi.com/?apikey=${process.env.API_KEY}&type=series&plot=full&s=brooklyn&page=1`)).json();
+    const {Search: series} = await (await fetch(`https://omdbapi.com/?apikey=${API_KEY}&type=series&plot=full&s=brooklyn&page=1`)).json();
 
     seriesSecondTitle.innerHTML = `${series[0].Title}`;
     seriesSecondImg.setAttribute('src', `${series[0].Poster}`)
@@ -93,7 +92,7 @@ function afterRendering() {
     const searchSeries = async ({target}) => {
         searchValue = target.value;
         const {Search: series,totalResults} = await (
-                await fetch(`https://omdbapi.com/?apikey=${process.env.API_KEY}&type=series&s=${searchValue}&plot=full&page=1`)).json();
+                await fetch(`https://omdbapi.com/?apikey=${API_KEY}&type=series&s=${searchValue}&plot=full&page=1`)).json();
         
         if(!totalResults || location.pathname !== "/series"){
             console.log("시리즈검색결과가 0입니다.")

@@ -9,9 +9,9 @@ import {
 export const globalStore = {
   flagger: false
 }
-
+const API_KEY = "7035c60c";
 const fetchData = async (pageNumber = 1, searchValue = 'bourne') => {
-  const res = await fetch(`https://www.omdbapi.com?apikey=${process.env.API_KEY}&s=${searchValue}&page=${pageNumber}`);
+  const res = await fetch(`https://www.omdbapi.com?apikey=${API_KEY}&s=${searchValue}&page=${pageNumber}`);
   const json = await res.json();
   console.log('fetchmovie')
   return json;
@@ -161,7 +161,7 @@ async function getData(pageNumber, searchValue = 'bourne') {
   const {
     Search: movies,
     totalResults
-  } = await (await fetch(`https://www.omdbapi.com?apikey=${process.env.API_KEY}&s=${searchValue}&page=${pageNumber}`)).json();
+  } = await (await fetch(`https://www.omdbapi.com?apikey=${API_KEY}&s=${searchValue}&page=${pageNumber}`)).json();
   if(!parseInt(totalResults)){
     console.log("검색결과가 없습니다")
     return;
