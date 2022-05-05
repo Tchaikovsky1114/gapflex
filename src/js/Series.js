@@ -33,7 +33,9 @@ export default async (homeEl) => {
         <section>
             <h3 class="series--search--result"></h3>
         <ul class="series--list">
-        
+        <div class="series--slide--wrapper">
+
+        </div>
         </ul>
         <div class="series--slide--button hide">
             <div class="slide--prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 256-256C512 114.6 397.4 0 256 0zM310.6 345.4c12.5 12.5 12.5 32.75 0 45.25s-32.75 12.5-45.25 0l-112-112C147.1 272.4 144 264.2 144 256s3.125-16.38 9.375-22.62l112-112c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L221.3 256L310.6 345.4z"/></svg></div>
@@ -79,9 +81,12 @@ async function getSecondBanner() {
 }
 
 function afterRendering() {
-    const seriesSlideButtonBox = document.querySelector('.series--slide--button')
+    
+    
+    
+    
     let searchValue;
-    let pageNumber;
+    let pageNumber = 1;
     globalStore.flagger = true;
 
     getFirstBanner();
@@ -89,12 +94,16 @@ function afterRendering() {
 
     const searchInput = document.querySelector('#search-input');
 
-    const searchSeries = async ({target}) => {
+    const searchSeries = async ({target} = searchValue,pageNumber) => {
+        if(!target){
+            target = searchValue;
+        }else{
         searchValue = target.value;
+        }
         const {Search: series,totalResults} = await (
-                await fetch(`https://omdbapi.com/?apikey=${API_KEY}&type=series&s=${searchValue}&plot=full&page=1`)).json();
-        
-        if(!totalResults || location.pathname !== "/series"){
+                await fetch(`https://omdbapi.com/?apikey=${API_KEY}&type=series&s=${searchValue}&plot=full&page=${pageNumber}`)).json();
+        console.log(series);
+        if(!totalResults || location.pathname !== "/series" || !series){
             console.log("시리즈검색결과가 0입니다.")
             return
         }else{
@@ -102,24 +111,84 @@ function afterRendering() {
         }
         
     }
+    
+    
     const serieslist = document.querySelector('.series--list');
     const searchSeriesResult = document.querySelector('.series--search--result');
+    const seriesSlideWrapper = document.querySelector('.series--slide--wrapper');
+    const seriesSlideButtonBox = document.querySelector('.series--slide--button'); 
     function renderSeries(series, totalResults) {
+          
         searchSeriesResult.innerHTML = "";
         searchSeriesResult.innerHTML = `There are "${totalResults}" total result for your "${searchValue.toUpperCase()}" search. `;
         seriesSlideButtonBox.classList.remove('hide');
         series.map((series) => {
             const seriesCard = document.createElement('li');
-            seriesCard.classList.add('series--card')
+            seriesCard.classList.add('series--card');
             seriesCard.innerHTML = /* html */ `
             <div class="series--title"><span>${series.Title}</span></div>
             <div class="series--release--year"><p>${series.Year}</P></div>
             <div class="series--image--box"><img src=${series.Poster} alt=${series.Title} /></div>
-            `
-            serieslist.append(seriesCard);
+            
+            `;
+            seriesSlideWrapper.append(seriesCard);
         })
     }
+    
+
+    const seriesSlidePrevButton = document.querySelector('.slide--prev');
+    const seriesSlideNextButton = document.querySelector('.slide--next');
+    let currentIndex = 1;
+    
+    function handleSlidePrev(){        
+        currentIndex > 0 ? currentIndex-- : 1
+        
+        const slideCard = seriesSlideWrapper.getElementsByClassName('series--card');
+        const size = slideCard[0].clientWidth * 4;
+        seriesSlideWrapper.style.transition = `transform 0.4s ease-in-out`
+        seriesSlideWrapper.style.transform = `translateX(${-size * currentIndex}px)`
+        
+        
+        console.log(currentIndex);
+    }
+    function handleSlideNext(){
+        currentIndex++;
+        const slideCard = seriesSlideWrapper.getElementsByClassName('series--card');
+        const size = slideCard[0].clientWidth * 4;
+        seriesSlideWrapper.style.transition = `transform 0.4s ease-in-out`;
+        seriesSlideWrapper.style.transform = `translateX(${-size * currentIndex}px)`;
+        
+        
+        console.log(currentIndex);
+    }
+    
+
+    seriesSlidePrevButton.addEventListener('click',handleSlidePrev);
+    seriesSlideNextButton.addEventListener('click',handleSlideNext);
     searchInput.addEventListener('change', searchSeries)
 
+    
 
+    const seriesButton = document.querySelector('.movies--button')
+
+    const showMoreSearchedSeriesResult = () => {
+        pageNumber++;
+        searchSeries(searchValue,pageNumber);
+    }
+
+    seriesButton.addEventListener('click',showMoreSearchedSeriesResult)
+        // window.addEventListener('resize',()=>{
+        //     const serieslistWidth = serieslist.getBoundingClientRect().width;
+        //     console.log(serieslistWidth);
+        // })
+//    const ro = new ResizeObserver(entries =>{
+//        entries.forEach(entry =>{
+//         const serieslistWidth = entry.contentRect;
+//         console.log(serieslistWidth.width);
+//        })
+//    })
+//    ro.observe(serieslist);
+   
+
+   
 }

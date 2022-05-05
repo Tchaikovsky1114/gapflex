@@ -59,19 +59,21 @@
   }
 }
 
-.series--list {
+.series--slide--wrapper {
   margin-top: 3rem;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 20px;
-  overflow: hidden;
+  
   .series--card {
     font-size: 18px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    flex-shrink: 0;
+    
     .series--title {
       width: 240px;
       white-space: nowrap;
@@ -89,7 +91,7 @@
         height: 200px;
         width: 240px;
         border-radius: 20px;
-        transition: .5s;
+        transition: .3s;
         &:hover{
             transform: scale(1.1);
         }
@@ -102,20 +104,27 @@
     justify-content: space-between;
     align-items: center;
     position:relative;
-    top:-100px;
+    top:-110px;
     left:0;
     .slide--prev,
     .slide--next{
+      top:-20px;
+      left:0;
         position:relative;
         padding: 1rem;
+        z-index: 2;
         cursor: pointer;
+        
         svg{
-          font-size: 18px;
+            width: 34px;
             position:absolute;
-            fill: white;
-            top:-40px;
-            left:-50px;
-
+            fill: rgba(237, 222, 175,0.5);
+            
+            left: 0;
+            transition: .5s;
+          &:hover{
+            fill: #fff;
+          }
         }
     }
 }
