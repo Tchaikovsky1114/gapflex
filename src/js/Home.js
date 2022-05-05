@@ -32,7 +32,7 @@ const fetchData = async (pageNumber = 1, searchValue = 'bourne') => {
 //   // state.a
 // }
 
-export default async (homeEl) => {
+export default async (homeEl,pathName) => {
   globalStore.flagger = false;
 
   const {
@@ -139,13 +139,19 @@ export default async (homeEl) => {
         autoplayBanner();
         clearInterval(autoplayBanner);
       }
-    }, 10000);
+    }, 5000);
   }
   onSlide();
 
   homeEl.innerHTML = ''
   homeEl.append(component)
-  afterRender()
+  if(location.pathname !== "/"){
+    console.log(location.pathname + "경로확인 여기는 HOME");
+    return;
+  }else{
+    afterRender(pathName)
+  }
+  
 };
 
 
@@ -156,13 +162,22 @@ async function getData(pageNumber, searchValue = 'bourne') {
     Search: movies,
     totalResults
   } = await (await fetch(`https://www.omdbapi.com?apikey=${process.env.API_KEY}&s=${searchValue}&page=${pageNumber}`)).json();
-  renderMovies(movies, totalResults);
+  if(!parseInt(totalResults)){
+    console.log("검색결과가 없습니다")
+    return;
+  }else{
+    renderMovies(movies, totalResults);
+  }
+  
   if (pageNumber * 10 < totalResults || totalResults < 10) {
     searchedResultCount(totalResults, searchValue);
   }
 }
 
 function renderMovies(movies = 'bourne', totalResults){
+  if(!totalResults || location.pathname !== "/") {
+    return;
+  }else{
   const movielist = document.querySelector('.movies--list')
   movies.map((movie, i) => {
     if (i < totalResults) {
@@ -177,10 +192,10 @@ function renderMovies(movies = 'bourne', totalResults){
                 <div class="movie--release--year"> released in <span>${movie.Year}</span></div>
                 `;
       movielist.append(movieEl);
-      movieEl.append(movieImg);
-
+      movieEl.append(movieImg);   
     }
-  });
+  })
+};
 };
 function searchedResultCount(totalResults, searchValue){
   const moviesCount = document.querySelector('.movies--count');
@@ -197,11 +212,16 @@ function searchedResultCount(totalResults, searchValue){
   }
 };
 
-function afterRender() {
+function afterRender(pathName) {
+  
   const movielist = document.querySelector('.movies--list')
   const callMoreMovieButton = document.querySelector('.movies--button');
+  const searchIcon = document.querySelector('#search-icon');
+  const searchInput = document.querySelector('#search-input');
   let searchResult;
   let pageNumber = 1;
+
+
   const handleSearch = (e) => {
     pageNumber = 1;
     searchResult = e.target.value;
@@ -213,8 +233,7 @@ function afterRender() {
   };
   getData();
 
-  const searchIcon = document.querySelector('#search-icon');
-  const searchInput = document.querySelector('#search-input');
+
   searchInput.addEventListener('change', handleSearch);
 
   const showMoreSearchedMovieResult = (searchResult) => {
