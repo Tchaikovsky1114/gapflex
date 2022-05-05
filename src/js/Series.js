@@ -4,8 +4,8 @@ import {
 import {
     createElement
 } from './navigate.js';
-import {API_KEY} from './Home'
 
+const API_KEY = "7035c60c";
 export default async (homeEl) => {
 
     const component = createElement( /*html*/ `
