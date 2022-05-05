@@ -198,6 +198,10 @@ function renderMovies(movies = 'bourne', totalResults){
 };
 };
 function searchedResultCount(totalResults, searchValue){
+  if(!totalResults || location.pathname !== '/'){
+    console.log("검색결과가 맞지 않거나 라우터가 다름");
+    return;
+  }
   const moviesCount = document.querySelector('.movies--count');
   const resultCount = document.createElement('div');
 
