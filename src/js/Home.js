@@ -45,7 +45,6 @@ export default async (homeEl,pathName) => {
   // comment tagged 사용
   const component = createElement( /* html */ `
   <div class="synopsis--wrapper hide">
-  <div class="synopsis bg"><p>Bourne:Synopsis</p>In Jason Bourne, Bourne remains on the run from CIA hit squads as he tries to uncover hidden truths about his father, while CIA director Robert Dewey orders the head of cyber-security Heather Lee to hunt him down. </div>
   <div class="synopsis fg"><p>Bourne:Synopsis</p>In Jason Bourne, Bourne remains on the run from CIA hit squads as he tries to uncover hidden truths about his father, while CIA director Robert Dewey orders the head of cyber-security Heather Lee to hunt him down. </div>
   </div>
   
@@ -79,8 +78,6 @@ export default async (homeEl,pathName) => {
 <h3>Monthly Recommend Movie Series<br/><span>:The Bourne Series</span></h3>
 <img class="silde--image" src=${movies[6].Poster} alt="Bourne Series">
 </div>
-
-</div>
 <div class="button--wrapper">
 <button class="pause-button">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -97,6 +94,8 @@ export default async (homeEl,pathName) => {
 </svg>
 </button>
 </div>
+</div>
+
 <section class="section banner">
 <div class="inner">
 <div class="movies--count"></div>
@@ -287,13 +286,6 @@ function afterRender(pathName) {
   function handleActors(){
     synopsisEl.classList.remove('hide')
     synopsisEl.innerHTML = /* html */`
-    <div class="synopsis bg"><p>Bourne:Actors</p>
-  <p>Jason Bourne - Matt Damon</p>
-  <p>Rachel Weisz - Mata Sierring</p>
-  <p>Marie Helena Kreuts -Franka Potente </p>
-  <p>Nicky Parsons - Julia Stiles</p>
-  <p>Ward Abbott - Brian Cox </p>
-</div>
 <div class="synopsis fg"><p>Bourne Series:Actors</p>
   <p>Jason Bourne - Matt Damon</p>
   <p>Rachel Weisz - Mata Sierring</p>
