@@ -44,10 +44,10 @@ li {
 }
 
 .synopsis {
-  width: 43.75rem;
   position: absolute;
-  top: 100px;
+  top: 65px;
   z-index: 9;
+  width: 36.25rem;
   right: 20px;
   background-clip: text;
   -webkit-background-clip: text;
@@ -57,7 +57,7 @@ li {
   grid-area: overlap;
   letter-spacing: 1px;
   -webkit-text-stroke: 4px transparent;
-
+  
   padding: 1rem;
   p {
     text-align: center;
@@ -90,7 +90,7 @@ li {
     var(--light-shadow) 100%,
     var(--gold) 55%
   );
-  color: #f9149f;
+  color: #000;
   transform: scale(1.03);
 }
 

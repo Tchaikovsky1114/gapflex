@@ -49,12 +49,12 @@ export default async (homeEl,pathName) => {
   <div class="synopsis fg"><p>Bourne:Synopsis</p>In Jason Bourne, Bourne remains on the run from CIA hit squads as he tries to uncover hidden truths about his father, while CIA director Robert Dewey orders the head of cyber-security Heather Lee to hunt him down. </div>
   </div>
   
-<div class="button--group">
+
+  <div class="slider">
+  <div class="button--group">
   <button class="synopsis--button">Synopsis</button>
   <button class="actors--button">Actors</button>
 </div>
-  <div class="slider">
-
 <div class="slide first--slide showing">
 <h3>Monthly Recommend Movie Series<br/>:The Bourne Series</h3>
 <img class="silde--image" src=${movies[0].Poster} alt="Bourne Series">
