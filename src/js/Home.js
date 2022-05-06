@@ -207,8 +207,9 @@ function searchedResultCount(totalResults, searchValue){
 
   resultCount.classList.add('movies--result')
   if (moviesCount.hasChildNodes()) {
-    resultCount.textContent = '';
-    resultCount.textContent = `There are "${totalResults}" total result for your "${searchValue.toUpperCase()}" search. `;
+    const movieResultCount = document.querySelector('.movies--result')
+    movieResultCount.textContent = '';
+    movieResultCount.textContent = `There are "${totalResults}" total result for your "${searchValue.toUpperCase()}" search. `;
   } else {
     resultCount.textContent = '';
     resultCount.textContent = `There are "${totalResults}" total result for your "${searchValue.toUpperCase()}" search. `;

@@ -46,14 +46,14 @@ li {
 .synopsis {
   width: 43.75rem;
   position: absolute;
-  top: 140px;
+  top: 100px;
   z-index: 9;
   right: 20px;
   background-clip: text;
   -webkit-background-clip: text;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
-  font-size: clamp(2em, 2vw, 3rem);
+  font-size: clamp(2em, 2vw, 2rem);
   grid-area: overlap;
   letter-spacing: 1px;
   -webkit-text-stroke: 4px transparent;
@@ -73,13 +73,13 @@ li {
 .synopsis.bg {
   background-image: repeating-linear-gradient(
     105deg,
-    var(--gold) 5%,
-    var(--dark-shadow) 100%,
-    var(--gold) 12%
+    var(--gold) 4%,
+    var(--dark-shadow) 86%,
+    var(--gold) 50%
   );
   color: transparent;
-  filter: drop-shadow(5px 5px 15px #a8a8a8);
-  transform: scaleY(1.04);
+  filter: drop-shadow(10px 5px 15px #a8a8a8);
+  transform: scaleY(1.02);
   
   transform-origin: top;
 }
@@ -90,7 +90,7 @@ li {
     var(--light-shadow) 100%,
     var(--gold) 55%
   );
-  color: white;
+  color: #f9149f;
   transform: scale(1.03);
 }
 

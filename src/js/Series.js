@@ -41,7 +41,7 @@ export default async (homeEl) => {
             <div class="slide--prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 256-256C512 114.6 397.4 0 256 0zM310.6 345.4c12.5 12.5 12.5 32.75 0 45.25s-32.75 12.5-45.25 0l-112-112C147.1 272.4 144 264.2 144 256s3.125-16.38 9.375-22.62l112-112c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L221.3 256L310.6 345.4z"/></svg></div>
             <div class="slide--next"><svg xmlns="http://www.w3.org/2000/svg" fill="#fff" viewBox="0 0 512 512"><path d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 256-256C512 114.6 397.4 0 256 0zM358.6 278.6l-112 112c-12.5 12.5-32.75 12.5-45.25 0s-12.5-32.75 0-45.25L290.8 256L201.4 166.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l112 112C364.9 239.6 368 247.8 368 256S364.9 272.4 358.6 278.6z"/></svg></div>
         </div>
-        <button class="movies--button">Show More Movies</button>
+        
         
         </section>
     </div>
@@ -83,18 +83,28 @@ async function getSecondBanner() {
 function afterRendering() {
     
     
+    getFirstBanner();
+    getSecondBanner();
     
-    
+
+
+
     let searchValue;
     let pageNumber = 1;
     globalStore.flagger = true;
-
-    getFirstBanner();
-    getSecondBanner();
+    let currentIndex = 1;
+    let newPageNumber = 1;
 
     const searchInput = document.querySelector('#search-input');
+    const seriesSlideWrapper = document.querySelector('.series--slide--wrapper');
 
     const searchSeries = async ({target} = searchValue,pageNumber) => {
+        pageNumber = 1;
+        newPageNumber = 1;
+        currentIndex = 1;
+        while(seriesSlideWrapper.firstChild){
+            seriesSlideWrapper.removeChild(seriesSlideWrapper.firstChild)
+        }
         if(!target){
             target = searchValue;
         }else{
@@ -104,21 +114,22 @@ function afterRendering() {
                 await fetch(`https://omdbapi.com/?apikey=${API_KEY}&type=series&s=${searchValue}&plot=full&page=${pageNumber}`)).json();
         console.log(series);
         if(!totalResults || location.pathname !== "/series" || !series){
-            console.log("시리즈검색결과가 0입니다.")
-            return
+            console.log("일치하는 항목이 없습니다.")
         }else{
             renderSeries(series, totalResults)
         }
-        
     }
+
+    
+
     
     
-    const serieslist = document.querySelector('.series--list');
     const searchSeriesResult = document.querySelector('.series--search--result');
-    const seriesSlideWrapper = document.querySelector('.series--slide--wrapper');
+    
     const seriesSlideButtonBox = document.querySelector('.series--slide--button'); 
     function renderSeries(series, totalResults) {
-          
+        
+        
         searchSeriesResult.innerHTML = "";
         searchSeriesResult.innerHTML = `There are "${totalResults}" total result for your "${searchValue.toUpperCase()}" search. `;
         seriesSlideButtonBox.classList.remove('hide');
@@ -138,7 +149,7 @@ function afterRendering() {
 
     const seriesSlidePrevButton = document.querySelector('.slide--prev');
     const seriesSlideNextButton = document.querySelector('.slide--next');
-    let currentIndex = 1;
+    
     
     function handleSlidePrev(){        
         currentIndex > 0 ? currentIndex-- : 1
@@ -147,9 +158,6 @@ function afterRendering() {
         const size = slideCard[0].clientWidth * 4;
         seriesSlideWrapper.style.transition = `transform 0.4s ease-in-out`
         seriesSlideWrapper.style.transform = `translateX(${-size * currentIndex}px)`
-        
-        
-        console.log(currentIndex);
     }
     function handleSlideNext(){
         currentIndex++;
@@ -158,37 +166,32 @@ function afterRendering() {
         seriesSlideWrapper.style.transition = `transform 0.4s ease-in-out`;
         seriesSlideWrapper.style.transform = `translateX(${-size * currentIndex}px)`;
         
+        showMoreSearchedSeriesResult()
         
-        console.log(currentIndex);
     }
     
 
     seriesSlidePrevButton.addEventListener('click',handleSlidePrev);
     seriesSlideNextButton.addEventListener('click',handleSlideNext);
     searchInput.addEventListener('change', searchSeries)
-
     
+    const callMoreSearchSeries = async(searchValue,newPageNumber) => {
+        console.log(newPageNumber);
+        console.log(searchValue);
 
-    const seriesButton = document.querySelector('.movies--button')
-
+        const {Search: series,totalResults} = await (
+                await fetch(`https://omdbapi.com/?apikey=${API_KEY}&type=series&s=${searchValue}&plot=full&page=${newPageNumber}`)).json();
+        console.log(series);
+        if(!totalResults || location.pathname !== "/series" || !series){
+            console.log("검색결과가 없습니다.")
+        }else{
+            renderSeries(series, totalResults)
+        }
+    }
+    
     const showMoreSearchedSeriesResult = () => {
-        pageNumber++;
-        searchSeries(searchValue,pageNumber);
+        newPageNumber++;
+        callMoreSearchSeries(searchValue,newPageNumber);
     }
 
-    seriesButton.addEventListener('click',showMoreSearchedSeriesResult)
-        // window.addEventListener('resize',()=>{
-        //     const serieslistWidth = serieslist.getBoundingClientRect().width;
-        //     console.log(serieslistWidth);
-        // })
-//    const ro = new ResizeObserver(entries =>{
-//        entries.forEach(entry =>{
-//         const serieslistWidth = entry.contentRect;
-//         console.log(serieslistWidth.width);
-//        })
-//    })
-//    ro.observe(serieslist);
-   
-
-   
 }
